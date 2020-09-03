@@ -15,6 +15,7 @@ The first step is to clone this repository and set the environment variable
 ```
 > git clone https://github.com/lingmar/minizinc-diversity.git
 > cd minizinc-diversity
+> git checkout develop
 > export MINIZINC_DIVERSITY_HOME=`pwd`
 ```
 
