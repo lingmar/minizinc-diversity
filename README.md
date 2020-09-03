@@ -13,9 +13,9 @@ The first step is to clone this repository and set the environment variable
 `MINIZINC_DIVERSITY_HOME` to point to the root of the repository:
 
 ```
-git clone https://github.com/lingmar/minizinc-diversity.git
-cd minizinc-diversity
-export MINIZINC_DIVERSITY_HOME=`pwd`
+> git clone https://github.com/lingmar/minizinc-diversity.git
+> cd minizinc-diversity
+> export MINIZINC_DIVERSITY_HOME=`pwd`
 ```
 
 The next step is making sure all dependencies are satisfied. The following
