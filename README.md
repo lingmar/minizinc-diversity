@@ -115,5 +115,16 @@ For more command line options of the tool, we for now refer to invoking the help
 command:
 
 ```
-./src/diverse.py --help
+> ./src/diverse.py --help
 ```
+
+## Known Issues and Limitations
+
+* The helper variable used during solving is hard-coded to ´dist´ and can
+  therefore not be used in the model.
+* The parser used for the solve item file (the file containing the diversity
+  annotations and ´solve minimize´ statement) is currently very limited. The
+  variable array provided as argument to the ´diverse_pairwise´ annotation must
+  be a name of a variable defined in the model file (and not a general MiniZinc
+  expression). Same goes for the objective function: an explicit variable must
+  be defined for it in the model file.

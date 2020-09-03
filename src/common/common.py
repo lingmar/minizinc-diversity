@@ -122,12 +122,6 @@ lexicographic optimisation (none) (default: %(default)s)""")
         required=False,
         action='store_true',
         help='Randomise weights on objectives multi-objective optimisation')
-    # argument_parser.add_argument(
-    #     '--output-intermediate',
-    #     required=False,
-    #     action='store_true',
-    #     default=False,
-    #     help='Output intermediate solutions')
     argument_parser.add_argument(
         '--auto-scaling',
         required=False,
@@ -145,13 +139,8 @@ lexicographic optimisation (none) (default: %(default)s)""")
         required=False,
         action='store_true',
         help=
-        'Use ::add_to_output annotation on distance variables (necessary in some cases)'
+        'Use ::add_to_output annotation on distance variables during solving (necessary in some cases. TODO: automatically add when needed.)'
     )
-    argument_parser.add_argument(
-        '--ppl',
-        required=False,
-        action='store_true',
-        help='Enables use of the search strategy of the plant layout problem')
     argument_parser.add_argument(
         '--float',
         '-f',
@@ -172,12 +161,7 @@ lexicographic optimisation (none) (default: %(default)s)""")
         '--output-mzn',
         required=False,
         type=str,
-        help=("Output model to this file name"))
-    argument_parser.add_argument(
-        '--photo',
-        required=False,
-        action='store_true',
-        help=("Enable search strategy for photo"))
+        help=("Output model to this file name (for debugging)"))
 
 
 class ArtificialSolution:
@@ -286,10 +270,6 @@ def lex_epsilon(instance,
 
     # Construct search annotations
     search_anns = []
-    if args.ppl:
-        search_anns.extend(PPL_search_anns())
-    elif args.photo:
-        search_anns.append(photo_search_ann())
     if args.warm_start:
         search_anns.extend(mzn_warm_start_from_file(args.warm_start))
 
@@ -345,10 +325,6 @@ def lex_seq(instance,
             search_anns.extend(mzn_warm_start(last_result))
         elif args.warm_start:
             search_anns.extend(mzn_warm_start_from_file(args.warm_start))
-        if args.ppl:
-            search_anns.extend(PPL_search_anns())
-        elif args.photo:
-            search_anns.append(photo_search_ann())
 
         # Solve
         last_result = solve_one_instance(
@@ -606,10 +582,6 @@ def solve_one_instance(instance,
         if objective:
             # Construct search annotations
             search_anns = []
-            if args.ppl:
-                search_anns.extend(PPL_search_anns())
-            if args.photo:
-                search_anns.append(photo_search_ann())
             if args.warm_start:
                 search_anns.extend(mzn_warm_start_from_file(args.warm_start))
 

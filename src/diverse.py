@@ -288,7 +288,7 @@ if __name__ == '__main__':
         init_scaling=[1 for _ in range(len(distance_functions))]
         if not args.fixed_scaling else args.fixed_scaling,
         update_scaling=update_scaling,
-        search_ann=common.PPL_search_ann() if args.ppl else '',
+        search_ann='',
         update_ub=update_ub)
 
     sols = gd.solve()
